@@ -1,10 +1,13 @@
 require('./models/User')
+require('./models/Track')
 const express = require('express')
 const mongoose = require('mongoose')
 //mongoose allows our express api to speak with MongoDb
 const bodyParser = require('body-parser')
 //bodyparser is a helper library that automatically parse information associated with the body of the incoming request
 const authRoutes = require('./routes/authRoutes')
+
+const trackRoutes = require('./routes/trackRoutes')
 
 const requireAuth = require('./middlewares/requireAuth')
 //this allows us to use the middleware authentication in and of our handlers
@@ -16,6 +19,8 @@ app.use(bodyParser.json())
 
 app.use(authRoutes)
 //associates all the request handlers added to the router with the main express application
+
+app.use(trackRoutes)
 
 const mongoUri = 'mongodb+srv://admin:passwordpassword@cluster0.hxanb.mongodb.net/tracker-server?retryWrites=true&w=majority'
 //this is the uri provided by Mongodb - Note that the passwordpassword above was entered in manually as the password that I created when initializing a user for the database on mongoDB
